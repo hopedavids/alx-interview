@@ -1,14 +1,10 @@
 #!/usr/bin/python3
-
-from typing import List
-
-"""
-    Lockboxes Contains method that finds the keys to
-    open other lockboxes
+"""Lockboxes Contains method that finds the keys to
+   open other lockboxes
 """
 
 
-def canUnlockAll(boxes: List[List[int]]) -> bool:
+def canUnlockAll(boxes):
     """
     Function that determines if you can open all the lockboxes
     Args:
@@ -16,17 +12,14 @@ def canUnlockAll(boxes: List[List[int]]) -> bool:
     Returns:
         True if you can open all the lockboxes, False otherwise
     """
+    unlocked = set()
 
-    n = len(boxes)
-    visited = [False] * n
-    stack = [0]  # Start with the first box (boxes[0])
-    visited[0] = True
-
-    while stack:
-        current_box = stack.pop()
-        for key in boxes[current_box]:
-            if key < n and not visited[key]:
-                stack.append(key)
-                visited[key] = True
-
-    return all(visited)
+    for box_id, box in enumerate(boxes):
+        if len(box) == 0 or box_id == 0:
+            unlocked.add(box_id)
+        for key in box:
+            if key < len(boxes) and key != box_id:
+                unlocked.add(key)
+        if len(unlocked) == len(boxes):
+            return True
+    return False
