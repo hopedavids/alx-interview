@@ -4,13 +4,14 @@
     a valid UTF-8 encoding.
 """
 
+
 def validUTF8(data):
     """ This method that determines if a given data set represents
         a valid UTF-8 encoding.
     """
-    # Initialize a variable to track the number of bytes in the current character
+    # Initialize a variable to track the number of bytes in the char
     num_bytes = 0
-    
+
     # Iterate through each byte in the data
     for byte in data:
         # Check if it's a continuation byte (starts with 10)
@@ -34,6 +35,6 @@ def validUTF8(data):
         else:
             # Invalid starting byte for a character
             return False
-    
+
     # If num_bytes is not 0 at the end, there's an incomplete character
     return num_bytes == 0
