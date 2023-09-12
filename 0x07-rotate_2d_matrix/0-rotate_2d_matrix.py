@@ -12,11 +12,11 @@ def rotate_2d_matrix(matrix: List[List]):
         You can assume the matrix will have 2 dimensions and will not be empty.
     """
 
-    n = len(matrix)
+    # Replica Matrix
+    replica = matrix[:]
 
-    for i in range(n):
-        for j in range(i, n):
-            matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
-
-    for i in range(n):
-        matrix[i].reverse()
+    for i in range(len(matrix)):
+        # retract column from replica
+        column = [row[i] for row in replica]
+        # Replace in matrix in reverse order
+        matrix[i] = column[::-1]
